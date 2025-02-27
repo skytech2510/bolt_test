@@ -17,7 +17,7 @@ export default async (req: Request, context: Context) => {
       return new Response(JSON.stringify({ clientSecret: paymentIntent.client_secret }), { status: 200 })
     } catch (error) {
       // Handle errors  
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: req.body }), { status: 500 })
     }
   }
 
