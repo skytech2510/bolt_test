@@ -2,7 +2,7 @@ import type { Context } from "@netlify/functions";
 import Stripe from "stripe"
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 export default async (req: Request, context: Context) => {
-  console.log(req.body);
+  console.log(req.body?.data);
   if (req.method === "POST") {
 
     try {
@@ -16,7 +16,7 @@ export default async (req: Request, context: Context) => {
       return new Response(JSON.stringify({ clientSecret: paymentIntent.client_secret }), { status: 200 })
     } catch (error) {
       // Handle errors  
-      return new Response(JSON.stringify({ error: process.env.VITE_STRIPE_SECRET_KEY }), { status: 500 })
+      return new Response(JSON.stringify({ error: req.body?.data }), { status: 500 })
     }
   }
 
