@@ -29,12 +29,12 @@ export function CheckoutPage({
       const { clientSecret } = data;
       const stripe = await stripePromise;
       const result = await stripe?.confirmCardPayment(clientSecret, {
-        payment_method: {
+        payment_method_options: {
           card: {
             number: '4242424242424242', // Test card number  
             exp_month: 12,
             exp_year: 34,
-            cvc: '123',
+            cvc: "1234"
           },
         },
       });
