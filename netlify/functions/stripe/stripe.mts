@@ -2,8 +2,9 @@ import type { Context } from "@netlify/functions";
 import Stripe from "stripe"
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 export default async (req: Request, context: Context) => {
+  console.log(req.body);
   if (req.method === "POST") {
-    const { amount } = JSON.parse(req.body); // Parse the request body  
+    const amount = 1000; // Parse the request body  
 
     try {
       // Create a payment intent  
