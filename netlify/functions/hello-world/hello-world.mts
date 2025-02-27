@@ -1,11 +1,15 @@
-import { Context } from '@netlify/functions'
-import Stripe from "stripe"
-const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
-export default async (request: Request, context: Context) => {
-  if (request.method === "POST") {
-    const { amount } = JSON.parse(request.body); // Parse the request body  
+import { Handler } from '@netlify/functions';
+import Stripe from 'stripe';
 
+// Initialize Stripe with your secret key from environment variables  
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+// Define the handler function  
+const handler: Handler = async (request, context) => {
+  if (request.method === "POST") {
     try {
+      const { amount } = JSON.parse(request.body); // Parse the request body  
+
       // Create a payment intent  
       const paymentIntent = await stripe.paymentIntents.create({
         amount,
@@ -24,11 +28,14 @@ export default async (request: Request, context: Context) => {
         body: JSON.stringify({ error: error.message }),
       };
     }
-  }
-  else {
+  } else {
+    // Handle unsupported methods  
     return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "that is Stirpe API" }),
+      statusCode: 405, // Method Not Allowed  
+      body: JSON.stringify({ message: "Method not allowed" }),
     };
   }
-}
+};
+
+// Export the handler  
+export { handler };  
