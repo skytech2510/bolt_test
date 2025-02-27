@@ -17,7 +17,7 @@ export default async (req: Request, context: Context) => {
       return new Response(JSON.stringify({ clientSecret: paymentIntent.client_secret }), { status: 200 })
     } catch (error) {
       // Handle errors  
-      return new Response(JSON.stringify({ error: req }), { status: 500 })
+      return new Response(JSON.stringify({ error: "sk_secret_51QdMxUR9Rtpk9GJNGsI0SBUIW5kPsMExKKlwCdTusAJ5Xr1hzfS9XPCMgmPSXTw4KXk4EF8cRLrQ8qHbWRkiF6ih00PvmkcAmN" }), { status: 500 })
     }
   }
 
