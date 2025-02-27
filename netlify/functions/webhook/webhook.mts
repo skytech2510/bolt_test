@@ -1,6 +1,10 @@
 import { Context } from '@netlify/functions';
-import { supabase } from '../../../src/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 
+// Create Supabase client with enhanced session handling
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export default async (request: Request, context: Context) => {
     try {
         // Parse the request body if needed (assuming it's JSON)  
