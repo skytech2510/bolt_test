@@ -8,7 +8,7 @@ export default async (req: Request, context: Context) => {
     try {
       // Create a payment intent  
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 1000,
+        amount: amount,
         currency: 'usd',
       });
 
