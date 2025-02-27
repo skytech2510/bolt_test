@@ -10,7 +10,6 @@ interface CheckoutPageProps {
   planPrice: string;
   onBack: () => void;
 }
-
 export function CheckoutPage({
   planId,
   planName,
