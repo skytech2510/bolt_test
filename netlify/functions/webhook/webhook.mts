@@ -13,7 +13,7 @@ export default async (request: Request, context: Context) => {
         const { data, error } = await supabase
             .from('webhook')
             .upsert({
-                data: { a: "asdfasdf" }, // Use a value from the request body or a default  
+                data: { a: new Date() }, // Use a value from the request body or a default  
             });
 
         // Check for errors during the upsert operation  
