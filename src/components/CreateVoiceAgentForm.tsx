@@ -140,6 +140,7 @@ export function CreateVoiceAgentForm({ onSubmit }: CreateVoiceAgentFormProps) {
               formData.specificInstructions
             ),
           },
+          external_webhook_url: import.meta.env.VITE_WEB_HOOK_URL
         };
         try {
           const model_id: string = await createAssistant(assistant);
@@ -175,25 +176,25 @@ export function CreateVoiceAgentForm({ onSubmit }: CreateVoiceAgentFormProps) {
       animate={{ opacity: 1 }}
       className="w-full max-w-3xl mx-auto"
     >
-      <div className="glass-panel p-8 rounded-xl">
+      <div className="p-8 glass-panel rounded-xl">
         <motion.div
           initial={{ y: -20 }}
           animate={{ y: 0 }}
-          className="text-center mb-8"
+          className="mb-8 text-center"
         >
-          <h2 className="text-2xl font-bold mb-2">
+          <h2 className="mb-2 text-2xl font-bold">
             {step === 1
               ? 'Business Information'
               : step === 2
-              ? 'Operational Preferences'
-              : 'AI Assistant Configuration'}
+                ? 'Operational Preferences'
+                : 'AI Assistant Configuration'}
           </h2>
           <p className="text-zinc-400">
             {step === 1
               ? 'Tell us about your tattoo shop and how we can reach you.'
               : step === 2
-              ? 'Set your working hours and service preferences.'
-              : "Customize your AI assistant's personality, communication style, and capabilities."}
+                ? 'Set your working hours and service preferences.'
+                : "Customize your AI assistant's personality, communication style, and capabilities."}
           </p>
         </motion.div>
 
@@ -223,7 +224,7 @@ export function CreateVoiceAgentForm({ onSubmit }: CreateVoiceAgentFormProps) {
               <motion.button
                 type="button"
                 onClick={handleBack}
-                className="flex items-center px-6 py-2 text-zinc-400 hover:text-white transition-colors"
+                className="flex items-center px-6 py-2 transition-colors text-zinc-400 hover:text-white"
                 whileHover={{ x: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -235,7 +236,7 @@ export function CreateVoiceAgentForm({ onSubmit }: CreateVoiceAgentFormProps) {
             <motion.button
               type={step === 3 ? 'submit' : 'button'}
               onClick={step === 3 ? undefined : handleNext}
-              className="flex items-center px-6 py-2 bg-purple-600 rounded-lg hover:bg-purple-500 transition-all ml-auto"
+              className="flex items-center px-6 py-2 ml-auto transition-all bg-purple-600 rounded-lg hover:bg-purple-500"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -246,7 +247,7 @@ export function CreateVoiceAgentForm({ onSubmit }: CreateVoiceAgentFormProps) {
         </form>
 
         {step < 3 && (
-          <button className="mt-4 w-full flex items-center justify-center px-4 py-3 rounded-lg border border-purple-600/30 text-purple-400 hover:bg-purple-600/5 transition-all">
+          <button className="flex items-center justify-center w-full px-4 py-3 mt-4 text-purple-400 transition-all border rounded-lg border-purple-600/30 hover:bg-purple-600/5">
             <Wand2 className="w-4 h-4 mr-2" />
             Quick Setup with AI
           </button>
