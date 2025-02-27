@@ -24,28 +24,32 @@ export function CheckoutPage({
     try {
       setLoading(true);
       setError(null);
-      const { data } = await axios.post('https://ttl2510.netlify.app/.netlify/functions/stripe', {
+      const response = await axios.post('https://ttl2510.netlify.app/.netlify/functions/stripe', {
         amount: 1000, // Amount in cents (e.g., $10.00)  
       });
-      const { clientSecret } = data;
-      const stripe = await stripePromise;
-      const result = await stripe?.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: {
-            number: '4242424242424242', // Test card number  
-            exp_month: 12,
-            exp_year: 34,
-            cvc: '123',
-          },
-        },
-      });
-      if (result?.error) {
-        console.log("error")
-      } else {
-        if (result?.paymentIntent.status === 'succeeded') {
-          console.log("test")
-        }
-      }
+      console.log(response.data);
+      // const { data } = await axios.post('https://ttl2510.netlify.app/.netlify/functions/stripe', {
+      //   amount: 1000, // Amount in cents (e.g., $10.00)  
+      // });
+      // const { clientSecret } = data;
+      // const stripe = await stripePromise;
+      // const result = await stripe?.confirmCardPayment(clientSecret, {
+      //   payment_method: {
+      //     card: {
+      //       number: '4242424242424242', // Test card number  
+      //       exp_month: 12,
+      //       exp_year: 34,
+      //       cvc: '123',
+      //     },
+      //   },
+      // });
+      // if (result?.error) {
+      //   console.log("error")
+      // } else {
+      //   if (result?.paymentIntent.status === 'succeeded') {
+      //     console.log("test")
+      //   }
+      // }
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Failed to process checkout'
